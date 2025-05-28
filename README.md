@@ -113,7 +113,7 @@ This is the most critical part for resolving the "insecure access" errors.
       
       // -- The following settings force Nextcloud to generate correct HTTPS URLs --
       'overwritehost' => 'nextcloud.yourdomain.com',
-      'overwrite.cli.url' => '[https://nextcloud.yourdomain.com](https://nextcloud.yourdomain.com)',
+      'overwrite.cli.url' => 'https://nextcloud.yourdomain.com',
       'overwritewebroot' => '/',
       'cookies_samesite' => 'None', // Use 'Lax' or 'None', 'None' is often better for complex proxy setups.
 
