@@ -15,7 +15,7 @@ This guide details the complete process for installing Nextcloud on CasaOS, inte
 1.  Open a terminal (use the WSL terminal if on Windows).
 2.  Run the official installation script:
     ```bash
-    wget -qO- [https://get.casaos.io](https://get.casaos.io) | sudo bash
+    wget -qO- https://get.casaos.io | sudo bash
     ```
 3.  Once complete, access your CasaOS dashboard using the server's local IP address provided in the terminal.
 
