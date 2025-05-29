@@ -45,7 +45,7 @@ For each of the following, go to the CasaOS **App Store** and search for the app
 12. Click on **Add a public hostname** and form will show up.
 13. When defining the **Public Hostname** for your Nextcloud service (e.g., `nextcloud.yourdomain.com`), configure it to point to your **Nginx Proxy Manager** instance:
     * **Service Type**: `HTTP`
-    * **URL**: Fill with your `Local Network IP` (e.g., `192.168.0.16`) without port cause Nginx Proxy Manager will handle any domain that access your local network IP will be pointing to what kind of your app. You can find the your local network ip by typing this command on terminal `ifconfig`.
+    * **URL**: Fill with your `Local Network IP` (e.g., `192.168.0.16`) without port cause Nginx Proxy Manager will handle any domain that access your local network IP will be pointing to what kind of your app. You can find your local network ip by typing this command on terminal `ifconfig`.
 
 ---
 
