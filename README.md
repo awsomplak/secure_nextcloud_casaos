@@ -32,7 +32,7 @@ For each of the following, go to the CasaOS **App Store** and search for the app
 
 ### **4. Setup Cloudflared Tunnel**
 1.  Go to [cloudflare.com](https://cloudflare.com) and login there. If you don't have an acccount register first and point your domain to cloudflare.
-2.  Click on Zero Trus menu.
+2.  Click on **Zero Trust** menu.
 3.  Click on **Networks** menu and select **Tunnels** sub menu.
 4.  If you don't have tunnel before, you can create it and select cloudflared tunnel type.
 5.  In the overview tab you will showed install and run connector guide.
