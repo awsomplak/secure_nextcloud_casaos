@@ -37,7 +37,7 @@ For each of the following, go to the CasaOS **App Store** and search for the app
 4.  If you don't have tunnel before, you can create it and select cloudflared tunnel type.
 5.  In the overview tab you will showed install and run connector guide.
 6.  No need to install cloudflared as guide but we just need copy the command that have a token.
-7.  Clik copy button on command. Keep it on your clipboard and we going to the next step.
+7.  Click copy button on command. Keep it on your clipboard and we going to the next step.
 8.  Open the `cloudflared` application from the CasaOS dashboard it will open the cloudflared-web ui.
 9.  Paste the command that we copied before and it will remove unused command cause we only need the token. Then click save button and it will changed to start and click the start button to start the cloudflared-tunnel.
 10. Go back to Cloudflare tunnel manager, check if the tunnel is connected.
