@@ -30,22 +30,32 @@ For each of the following, go to the CasaOS **App Store** and search for the app
 
 ---
 
-### **4. Configure Cloudflared Tunnel**
-1.  Open the `cloudflared` application from the CasaOS dashboard.
-2.  Follow the UI instructions to log in to your Cloudflare account and create a new tunnel.
-3.  When defining the **Public Hostname** for your Nextcloud service (e.g., `nextcloud.yourdomain.com`), configure it to point to your **Nginx Proxy Manager** instance:
+### **4. Setup Cloudflared Tunnel**
+1.  Go to [cloudflare.com](https://cloudflare.com) and login there. If you don't have an acccount register first and point your domain to cloudflare.
+2.  Click on Zero Trus menu.
+3.  Click on **Networks** menu and select **Tunnels** sub menu.
+4.  If you don't have tunnel before, you can create it and select cloudflared tunnel type.
+5.  In the overview tab you will showed install and run connector guide.
+6.  No need to install cloudflared as guide but we just need copy the command that have a token.
+7.  Clik copy button on command. Keep it on your clipboard and we going to the next step.
+8.  Open the `cloudflared` application from the CasaOS dashboard it will open the cloudflared-web ui.
+9.  Paste the command that we copied before and it will remove unused command cause we only need the token. Then klick save button and it will changed to start and klick the start button to start the cloudflared-tunnel.
+10. Go back to Cloudflare tunnel manager, check if the tunnel is connected.
+11. Now edit the tunnel and click on **Public Hostnames** tab to add our domain pointing to our local network ip.
+12. Click on **Add a public hostname** and form will show up.
+13. When defining the **Public Hostname** for your Nextcloud service (e.g., `nextcloud.yourdomain.com`), configure it to point to your **Nginx Proxy Manager** instance:
     * **Service Type**: `HTTP`
-    * **URL**: `http://<NPM-Container-IP>:<NPM-Port>` (e.g., `http://172.17.0.4:80`). You can find the IP in the Nginx Proxy Manager app settings within CasaOS.
-    * Normally the port 80 and 443 for web HTTP and HTTPS, and for Nginx Proxy Manager panel dashboard port is 81.
+    * **URL**: Fill with your `Local Network IP` (e.g., `192.168.0.16`) without port cause Nginx Proxy Manager will handle any domain that access your local network IP will be pointing to what kind of your app. You can find the your local network ip by typing this command on terminal `ifconfig`.
 
 ---
 
 ### **5. Setup Nginx Proxy Manager**
-1.  Open Nginx Proxy Manager. The default credentials are:
+1.  After install Nginx Proxy Manager we will got port 80 and 443 as default web port for HTTP and HTTPS to handle incoming connection and then port 81 to access the Nginx Proxy Manager panel dashboard.
+2.  Open Nginx Proxy Manager in the browser with url `http://192.168.x.x:81`. The default credentials are:
     * **Email**: `admin@example.com`
     * **Password**: `changeme`
-2.  Change the default credentials immediately upon first login.
-3.  Navigate to **Hosts -> Proxy Hosts** and click **Add Proxy Host**.
+3.  Change the default credentials immediately upon first login.
+4.  Navigate to **Hosts -> Proxy Hosts** and click **Add Proxy Host**.
 
 #### **Tab: Details**
 * **Domain Names**: Your full Nextcloud domain (e.g., `nextcloud.yourdomain.com`).
@@ -54,8 +64,11 @@ For each of the following, go to the CasaOS **App Store** and search for the app
 * **Forward Port**: The port for the Nextcloud container, which is `7580` from default installation config.
 * **Enable** `Websocket Support`.
 
+#### **Tab: SSL**
+* We don't need SSL configuration cause **Cloudflare** already have SSL and we will forward it to our nextcloud.
+
 #### **Tab: Advanced**
-* Paste the following custom Nginx configuration. This adds security headers and ensures the correct client information is passed to Nextcloud.
+* Paste the following custom Nginx configuration. This add some security headers configuration and ensures the correct client information is passed to Nextcloud.
     ```nginx
     # Security Headers
     add_header Strict-Transport-Security "max-age=15552000; includeSubDomains; preload" always;
@@ -102,7 +115,7 @@ This is the most critical part for resolving the "insecure access" errors.
       'trusted_proxies' => [
         '172.17.0.x', // Your Nginx Proxy Manager Container IP
         '172.18.0.1', // Your Docker Host IP (typically the gateway) from nextcloud nextwork
-        '192.168.x.x', // Your server's LAN IP
+        '192.168.x.x', // Your server's LAN/Wifi IP
       ],
 
       // Define which headers to check for the original client IP.
@@ -134,10 +147,10 @@ This step provides a direct override to ensure Nextcloud knows it's behind an HT
 
 1.  On the CasaOS dashboard, find your Nextcloud app.
 2.  Click the three-dots icon and select **Settings**.
-3.  Scroll down and add a new **Environment Variable**:
+3.  Scroll down and edit this **Environment Variable**:
     * **Name**: `OVERWRITEPROTOCOL`
     * **Value**: `https`
-4.  Click **Save**. The container will restart.
+4.  Click **Save**. The container will restart. **Notes**: it will restart and recreating the container, any of changes you make inside the container will be gone except the data in the volumes.
 
 ---
 
